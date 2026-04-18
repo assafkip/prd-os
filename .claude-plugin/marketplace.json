@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "prd-os",
+  "description": "Standalone PRD + DSSE execution system for Claude Code",
+  "owner": { "name": "Assaf Kipnis" },
+  "plugins": [
+    {
+      "name": "prd-os",
+      "source": "./plugins/prd-os",
+      "description": "PRD lifecycle (/prd-*) + DSSE issue execution (/issue-*) with Codex review gates and scope enforcement.",
+      "category": "productivity"
+    }
+  ]
+}

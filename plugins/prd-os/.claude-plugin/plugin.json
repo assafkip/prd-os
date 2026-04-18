@@ -1,0 +1,10 @@
+{
+  "name": "prd-os",
+  "version": "0.2.0",
+  "description": "PRD operating system with DSSE execution: capture rough ideas, draft reviewable PRDs, run Codex review + adversarial review, triage findings, decompose into atomic issue specs, and execute those issues with scope enforcement, receipts, and Codex review. Ships /prd-start, /prd-review, /prd-approve, /prd-triage, /prd-split, /issue-start, /issue-approve, /issue-verify, /issue-review, /issue-amend, /issue-closeout.",
+  "author": {
+    "name": "Assaf Kipnis"
+  },
+  "repository": "https://github.com/assafkip/prd-os",
+  "license": "MIT"
+}
