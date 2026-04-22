@@ -24,6 +24,7 @@ EXPECTED = {
     "prd-triage.md": ["prd_runner.py", "findings_writer.py"],
     "prd-approve.md": ["prd_runner.py"],
     "prd-split.md": ["prd_split.py"],
+    "prd-map.md": ["prd_map_runner.py"],
     "issue-start.md": ["issue_runner.py"],
     "issue-approve.md": ["issue_runner.py"],
     "issue-verify.md": ["issue_runner.py"],
