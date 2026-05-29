@@ -100,3 +100,7 @@ Without a config, defaults work for any generic repo layout.
 ## License
 
 MIT.
+
+---
+
+I built this to run my own PRDs and issues through Claude Code, and I open-sourced it. I ship paid Claude Code kits for founders at https://claudedaddy.gumroad.com, and I build these systems for teams that want one wired to their own setup. Book a call: https://calendar.app.google/cMFvhvDsfi9iyWYy9
