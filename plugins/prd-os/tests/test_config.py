@@ -204,16 +204,16 @@ def test_non_string_codex_values_raise(
         import_config.load(fake_repo, strict=True)
 
 
-def test_ktlyst_compatibility_config_loads(import_config, fake_repo, write_config):
-    """ktlyst migration: plugin config can point at the existing ktlyst paths
-    so the plugin runner operates against live q-ktlyst issues without moves."""
+def test_external_compatibility_config_loads(import_config, fake_repo, write_config):
+    """external migration: plugin config can point at the existing external paths
+    so the plugin runner operates against live example-project issues without moves."""
     write_config(fake_repo, {
         "config_schema_version": 1,
-        "issues_dir": "q-ktlyst/.q-system/issues",
+        "issues_dir": "example-project/.q-system/issues",
         "state_dir": ".claude/state",
     })
     cfg = import_config.load(fake_repo, strict=True)
-    assert cfg.issues_dir == (fake_repo / "q-ktlyst" / ".q-system" / "issues").resolve()
+    assert cfg.issues_dir == (fake_repo / "example-project" / ".q-system" / "issues").resolve()
     assert cfg.state_dir == (fake_repo / ".claude" / "state").resolve()
     assert cfg.active_issue_state_path == (
         fake_repo / ".claude" / "state" / "active-issue.json"

@@ -21,7 +21,7 @@ Subcommands:
   record-review <kind>     Increment review round counter (standard|adversarial) under cap
 
 Behavior contract mirrors the pre-plugin runner at
-q-ktlyst/.q-system/scripts/issue-runner.py. Exit codes, stderr messages, and
+example-project/.q-system/scripts/issue-runner.py. Exit codes, stderr messages, and
 stdout JSON are preserved so existing commands and hooks see the same behavior.
 """
 

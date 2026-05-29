@@ -13,7 +13,7 @@ Run the required reviews for the active DSSE issue. Execute in order:
    ISSUE_ID=$(python3 "${CLAUDE_PLUGIN_ROOT}/scripts/issue_runner.py" status | python3 -c "import sys,json; print(json.load(sys.stdin).get('issue_id',''))")
    ```
 
-   `$ALLOWED` is a JSON array (e.g. `["q-ktlyst/.q-system/agent-pipeline/schemas/**","q-ktlyst/.q-system/scripts/**"]`). If empty, stop and tell the founder the spec has no scope.
+   `$ALLOWED` is a JSON array (e.g. `["example-project/.q-system/agent-pipeline/schemas/**","example-project/.q-system/scripts/**"]`). If empty, stop and tell the founder the spec has no scope.
 
 3. Try to claim a "standard" review slot before invoking Codex:
 

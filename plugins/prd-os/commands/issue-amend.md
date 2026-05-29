@@ -4,7 +4,7 @@ description: Re-snapshot the active issue's scope from the spec, clear verified 
 
 Use this when you realize mid-build that the spec was wrong. The flow:
 
-1. The founder edits the issue spec in `q-ktlyst/.q-system/issues/<id>.md` (or the instance-equivalent path). Typical edits: widen `allowed_files`, adjust `required_checks`, add a new `disallowed_files` entry.
+1. The founder edits the issue spec in `example-project/.q-system/issues/<id>.md` (or the instance-equivalent path). Typical edits: widen `allowed_files`, adjust `required_checks`, add a new `disallowed_files` entry.
 
 2. Run amend with a short reason explaining what changed and why:
 
