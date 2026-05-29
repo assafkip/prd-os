@@ -4,6 +4,20 @@ Standalone Claude Code plugin for PRD authoring and DSSE issue execution.
 
 One plugin, one install, one version. Turns rough ideas into reviewable PRDs, gates them through Codex review, triages findings, decomposes into atomic issue specs, and executes those issues with scope enforcement and receipts.
 
+## Questions people ask
+
+**How do I stop Claude Code from creeping outside the task scope?**
+Snapshot the allowed files into state before work starts, then block edits to anything else. prd-os does this at `/issue-approve`: it freezes the `allowed_files` set, and a hook blocks any Edit or Write outside it. Widening scope takes an explicit `/issue-amend` with a written reason, logged to the audit trail.
+
+**How do I get a real PRD workflow inside Claude Code instead of a chat thread?**
+prd-os adds eleven slash commands that move an idea through a state machine: draft, review, triage, approve, split into atomic issues, then execute each one with scope enforcement and receipts. The PRD ends up as the permanent record of what shipped and what changed mid-build.
+
+**How do I keep Claude from auto-applying code-review findings?**
+Make triage explicit. prd-os never auto-applies a Codex finding. Every finding needs a disposition: accepted, rejected, or deferred. Rejections and defers require a written rationale on disk. Closeout stays blocked until every in-scope finding is dispositioned.
+
+**How is prd-os different from a PRD template or asking ChatGPT to write a PRD?**
+A template is a document. prd-os is a state machine with gates. It runs an independent Codex reviewer with cold context, enforces file scope at write time, caps review recursion, and writes a full audit trail. The free plugin here does this. The paid build adds worked examples, setup guides, and support: https://claudedaddy.gumroad.com/l/ayfunm
+
 ## What it ships
 
 **PRD side (`/prd-*`):**
@@ -103,4 +117,10 @@ MIT.
 
 ---
 
-I built this to run my own PRDs and issues through Claude Code, and I open-sourced it. I ship paid Claude Code kits for founders at https://claudedaddy.gumroad.com, and I build these systems for teams that want one wired to their own setup. Book a call: https://calendar.app.google/cMFvhvDsfi9iyWYy9
+I built this to run my own PRDs and issues through Claude Code, and I open-sourced it. This repo is the free plugin.
+
+The paid **prd-os kit** adds the worked end-to-end example, per-OS setup guides, and a 210-test suite shipped green: https://claudedaddy.gumroad.com/l/ayfunm
+
+More kits for founders building on Claude Code: https://claudedaddy.gumroad.com
+
+Want one wired to your own repo, or a larger Claude Code reliability system built around it? I build these for teams. Book a call: https://calendar.app.google/cMFvhvDsfi9iyWYy9
