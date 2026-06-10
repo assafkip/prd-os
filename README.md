@@ -121,6 +121,6 @@ I built this to run my own PRDs and issues through Claude Code, and I open-sourc
 
 The paid **prd-os kit** adds the worked end-to-end example, per-OS setup guides, and a 210-test suite shipped green: https://claudedaddy.gumroad.com/l/ayfunm
 
-More kits for founders building on Claude Code: https://claudedaddy.gumroad.com
+More kits for founders building on Claude Code: https://claudedaddy.io
 
 Want one wired to your own repo, or a larger Claude Code reliability system built around it? I build these for teams. Book a call: https://calendar.app.google/cMFvhvDsfi9iyWYy9
