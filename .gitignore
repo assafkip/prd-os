@@ -4,3 +4,7 @@ __pycache__/
 .venv/
 *.egg-info/
 .pytest_cache/
+
+# prd-os runtime/process state produced when dogfooding the plugin in this repo
+.prd-os/
+.claude/
