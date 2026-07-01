@@ -27,6 +27,37 @@ findings_path: .prd-os/findings/{{prd_id}}-findings.jsonl
 
 <!-- How. Keep it scannable. Diagrams go inline as fenced blocks. -->
 
+## Alternatives considered
+
+<!--
+Options you weighed and rejected. For each: name the option, the tradeoff, and
+the one reason it lost. This is what lets the reviewer tell a deliberately
+rejected path from one you never saw. Empty here reads as "no alternatives
+exist," which is rarely true.
+
+- **<option>** — Rejected: <why>.
+-->
+
+## Scenarios
+
+<!--
+Concrete end-to-end walkthroughs of the approach in use. One per distinct path.
+Actor, trigger, steps, outcome. Prove the approach against the real flow, not
+the abstraction.
+
+- **<scenario name>.** <actor> does <trigger>; <steps>; <outcome>.
+-->
+
+## Resolved decisions
+
+<!--
+The counterpart to Open questions: decisions now closed, each with its
+rationale. This is the running record of what was settled and why, so it does
+not get re-litigated later.
+
+- **<decision>.** Decided: <choice>. Rationale: <why>.
+-->
+
 ## Risks and rollback
 
 <!-- Blast radius, migration cost, how to back out if this ships wrong. -->

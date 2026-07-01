@@ -43,7 +43,11 @@ REVIEW_CAP_DEFAULTS = {"standard": 2, "adversarial": 1}
 REVIEW_CAP_OVERRIDE_ENV = "ISSUE_ALLOW_REVIEW_REPEAT"
 
 CONFIG_RELPATH = ".prd-os/config.json"
-DEFAULT_ISSUES_DIR = "issues"
+# Must match config.py's DEFAULTS["issues_dir"]. The two readers (this runner
+# and config.py) resolve issues_dir independently; divergent defaults caused a
+# no-config repo to write issue specs to `.prd-os/issues` (via prd_split/config)
+# while this runner looked under `./issues`, so loads failed.
+DEFAULT_ISSUES_DIR = ".prd-os/issues"
 DEFAULT_FINDINGS_SUBDIR = "findings"
 DEFAULT_STATE_DIR = ".claude/state"
 

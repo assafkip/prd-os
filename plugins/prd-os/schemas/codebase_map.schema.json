@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "prd-os codebase map",
+  "description": "Snapshot of a repo's structure, stack, and entry points. Built by prd_map_runner.py and consumed by PRD planning/review commands so a PRD author is not writing blind. Facts only; no pattern distillation in this schema version.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "built_at",
+    "repo_root",
+    "languages",
+    "package_manifests",
+    "entry_points",
+    "directory_tree",
+    "notable_files"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "enum": [1]
+    },
+    "built_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC iso8601 timestamp when this map was generated."
+    },
+    "git_sha": {
+      "type": ["string", "null"],
+      "description": "HEAD commit sha at build time, null if not a git repo."
+    },
+    "repo_root": {
+      "type": "string",
+      "description": "Absolute path to the repo root at build time. For informational use; do not consume as a hard dependency."
+    },
+    "languages": {
+      "type": "object",
+      "description": "Detected source languages with file counts. Keys are lowercase language names.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["file_count", "extensions"],
+        "properties": {
+          "file_count": {"type": "integer", "minimum": 0},
+          "extensions": {
+            "type": "array",
+            "items": {"type": "string"},
+            "minItems": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "package_manifests": {
+      "type": "array",
+      "description": "Paths to detected package manifests, relative to repo_root.",
+      "items": {
+        "type": "object",
+        "required": ["path", "kind"],
+        "properties": {
+          "path": {"type": "string"},
+          "kind": {
+            "type": "string",
+            "enum": [
+              "pyproject.toml",
+              "setup.py",
+              "requirements.txt",
+              "package.json",
+              "Cargo.toml",
+              "go.mod",
+              "Gemfile",
+              "pom.xml",
+              "build.gradle",
+              "composer.json"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "test_framework": {
+      "type": ["string", "null"],
+      "description": "Detected primary test framework (pytest, jest, vitest, cargo, etc.), null if not detected."
+    },
+    "lint_configs": {
+      "type": "array",
+      "description": "Paths to detected lint/format configs, relative to repo_root.",
+      "items": {"type": "string"}
+    },
+    "entry_points": {
+      "type": "array",
+      "description": "Paths to likely program entry points (main.py, index.ts, server entrypoints, CLI scripts declared in manifests).",
+      "items": {"type": "string"}
+    },
+    "directory_tree": {
+      "type": "array",
+      "description": "Top-level source directories with file counts. Sorted by file count descending. Excludes build artifacts and dependency caches.",
+      "items": {
+        "type": "object",
+        "required": ["path", "file_count"],
+        "properties": {
+          "path": {"type": "string"},
+          "file_count": {"type": "integer", "minimum": 0}
+        },
+        "additionalProperties": false
+      }
+    },
+    "notable_files": {
+      "type": "object",
+      "description": "Presence flags for files that meaningfully shape the project. Booleans only; never contents.",
+      "additionalProperties": {"type": "boolean"}
+    },
+    "env_files_present": {
+      "type": "array",
+      "description": "Names of .env / dotenv files found (e.g. .env, .env.example). Names only, never contents.",
+      "items": {"type": "string"}
+    },
+    "todo_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total TODO/FIXME/HACK/XXX comments found in tracked source directories."
+    },
+    "total_loc": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Approximate total lines of code across detected source files."
+    },
+    "ignored_paths": {
+      "type": "array",
+      "description": "Path globs excluded during the scan. Documented for reproducibility.",
+      "items": {"type": "string"}
+    }
+  },
+  "additionalProperties": false
+}

@@ -30,11 +30,18 @@ Codex output shape directly).
 
 ## Severity rubric
 
-- `blocker` — must fix before the PRD can advance to `approved`.
-- `major` — significant concern; approval requires an explicit disposition
+Assign severity through one lens: **what is the penalty for being wrong?** Weigh
+the cost if this concern is real and ships unaddressed against how plausible it
+is. High penalty + plausible escalates; low penalty stays a nit regardless of
+how certain you are.
+
+- `blocker` — high penalty for being wrong (data loss, security, a broken gate,
+  an untestable contract) and plausible. Must fix before the PRD can advance to
+  `approved`.
+- `major` — significant penalty; approval requires an explicit disposition
   (accepted with fix, rejected with rationale, or deferred with owner).
-- `minor` — worth fixing, not blocking.
-- `nit` — wording, formatting, non-substantive.
+- `minor` — low penalty for being wrong; worth fixing, not blocking.
+- `nit` — effectively no penalty: wording, formatting, non-substantive.
 
 ## Adversarial pass
 

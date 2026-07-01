@@ -450,10 +450,41 @@ def cmd_set_disposition(cfg: Config, args: argparse.Namespace) -> int:
 # ---------------------------------------------------------------------------
 
 
+def cmd_advisory(cfg: Config, args: argparse.Namespace) -> int:
+    """Print the cross-PRD xref advisory for a PRD's pending findings.
+
+    Non-blocking guarantee: ANY failure of the xref (raised exception, import
+    error, missing/malformed sibling file) is caught here, logged as a one-line
+    warning to stderr, and swallowed. The advisory can never change this
+    command's exit code or block `/prd-triage`. Advisory means advisory.
+    """
+    try:
+        import findings_xref
+
+        repo_root = Path(args.repo_root).resolve() if args.repo_root else None
+        matches = findings_xref.cross_reference(
+            args.prd_id,
+            cfg=cfg,
+            repo_root=repo_root,
+            threshold=getattr(args, "threshold", None),
+        )
+        block = findings_xref.format_advisory(matches)
+        if block:
+            print(block)
+    except Exception as exc:  # noqa: BLE001 - advisory must never block triage
+        sys.stderr.write(f"xref unavailable: {exc}\n")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo-root", help="override repo root discovery")
     sub = parser.add_subparsers(dest="cmd", required=True)
+
+    p_adv = sub.add_parser("advisory")
+    p_adv.add_argument("prd_id")
+    p_adv.add_argument("--threshold", type=float, default=None)
+    p_adv.set_defaults(func=cmd_advisory)
 
     p_add = sub.add_parser("add")
     p_add.add_argument("prd_id")
@@ -482,6 +513,11 @@ def main(argv: list[str] | None = None) -> int:
         repo_root = Path(args.repo_root).resolve() if args.repo_root else None
         cfg = load_config(repo_root, strict=True)
     except ConfigError as exc:
+        # The advisory command is non-blocking by contract: a config error must
+        # never block /prd-triage. Every other command genuinely needs config.
+        if getattr(args, "func", None) is cmd_advisory:
+            sys.stderr.write(f"xref unavailable: {exc}\n")
+            return 0
         sys.stderr.write(f"prd-os config error: {exc}\n")
         return 2
     return args.func(cfg, args)
